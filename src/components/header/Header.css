@@ -1,0 +1,15 @@
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.header-logo {
+  width: 200px;
+}
+
+.header-scores {
+  display: flex;
+  gap: 1rem;
+}
