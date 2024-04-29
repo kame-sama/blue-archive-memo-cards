@@ -1,0 +1,19 @@
+.score {
+  width: 125px;
+  padding: 0.25rem 0.5rem;
+  background-color: darkblue;
+  color: azure;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  cursor: default;
+}
+
+.score-heading {
+  font-weight: 900;
+}
+
+.score-value {
+  font-weight: 600;
+}
