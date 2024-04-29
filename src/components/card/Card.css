@@ -1,0 +1,44 @@
+.card {
+  --card-width: 180px;
+  --card-height: 275px;
+  --card-padding: 10px;
+
+  width: var(--card-width);
+  height: var(--card-height);
+  padding: var(--card-padding);
+  background-color: azure;
+  border: 1px solid darkblue;
+  border-radius: 5px;
+  display: grid;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.card-img {
+  width: 100%;
+  height: var(--card-width);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-img > img {
+  position: inherit;
+  z-index: 2;
+}
+
+.card-img > img.hidden {
+  display: none;
+}
+
+.card-first-name,
+.card-last-name,
+.card-japan-name {
+  text-align: center;
+  width: calc(var(--card-width) - 2 * var(--card-padding));
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
