@@ -13,6 +13,9 @@ import {
 } from './components/components';
 import '@fontsource-variable/noto-sans-jp';
 import './App.css';
+import useSound from 'use-sound';
+import clickSound from '/click.wav.mp3';
+import { SoundContext } from './context/SoundContext';
 
 function App() {
   const [deck, setDeck] = useState<Character[]>();
@@ -23,6 +26,8 @@ function App() {
   const currentScoreRef = useRef<HTMLDivElement>(null);
   const bestScoreRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const [playClickSound] = useSound(clickSound);
+  const [isSoundOn, setIsSoundOn] = useState(false);
 
   useEffect(() => {
     fetchDataFromApi().then((response) => {
@@ -85,29 +90,33 @@ function App() {
         setDeck(shuffle(deck!.slice(0)));
       }
     }
+
+    if (isSoundOn) playClickSound();
   };
 
   return (
-    <Layout>
-      <Header>
-        <Score score={score} ref={currentScoreRef}>
-          Current:
-        </Score>
-        <Score score={best} ref={bestScoreRef}>
-          Best:
-        </Score>
-      </Header>
-      <Main ref={cardsRef}>
-        {deck ? (
-          deck?.map((d) => (
-            <Card key={d.id} data={d} onClickHandler={handleCardClick} />
-          ))
-        ) : (
-          <Loader />
-        )}
-      </Main>
-      <Footer />
-    </Layout>
+    <SoundContext.Provider value={{ isSoundOn, setIsSoundOn }}>
+      <Layout>
+        <Header>
+          <Score score={score} ref={currentScoreRef}>
+            Current:
+          </Score>
+          <Score score={best} ref={bestScoreRef}>
+            Best:
+          </Score>
+        </Header>
+        <Main ref={cardsRef}>
+          {deck ? (
+            deck?.map((d) => (
+              <Card key={d.id} data={d} onClickHandler={handleCardClick} />
+            ))
+          ) : (
+            <Loader />
+          )}
+        </Main>
+        <Footer />
+      </Layout>
+    </SoundContext.Provider>
   );
 }
 
