@@ -19,6 +19,8 @@ function App() {
   const [best, setBest] = useState(0);
   const clicked = useRef(new Set<string>());
   const data = useRef<Character[]>([]);
+  const currentScoreRef = useRef<HTMLDivElement>(null);
+  const bestScoreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetchDataFromApi().then((response) => {
@@ -26,6 +28,26 @@ function App() {
       setDeck(data.current.slice(0, 4));
     });
   }, []);
+
+  useEffect(() => {
+    currentScoreRef.current?.classList.add('scale-up');
+    const timeoutId = setTimeout(() => {
+      currentScoreRef.current?.classList.remove('scale-up');
+    }, 200);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [score]);
+
+  useEffect(() => {
+    bestScoreRef.current?.classList.add('scale-up');
+    const timeoutId = setTimeout(() => {
+      bestScoreRef.current?.classList.remove('scale-up');
+    }, 200);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [best]);
 
   const handleCardClick = function (id: string) {
     if (clicked.current.has(id)) {
@@ -56,8 +78,12 @@ function App() {
   return (
     <Layout>
       <Header>
-        <Score score={score}>Current:</Score>
-        <Score score={best}>Best:</Score>
+        <Score score={score} ref={currentScoreRef}>
+          Current:
+        </Score>
+        <Score score={best} ref={bestScoreRef}>
+          Best:
+        </Score>
       </Header>
       <Main>
         {deck ? (

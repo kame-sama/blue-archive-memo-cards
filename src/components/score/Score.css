@@ -8,6 +8,11 @@
   justify-content: space-between;
   font-size: 1.25rem;
   cursor: default;
+  transition: transform 200ms ease;
+}
+
+.score.scale-up {
+  transform: scale(1.15);
 }
 
 .score-heading {

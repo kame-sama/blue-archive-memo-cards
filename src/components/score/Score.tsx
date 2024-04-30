@@ -1,17 +1,19 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, forwardRef, Ref } from 'react';
 import './Score.css';
 
 interface ScoreProps extends HTMLAttributes<HTMLDivElement> {
   score: number;
 }
 
-function Score({ children, score }: ScoreProps) {
-  return (
-    <div className="score">
-      <div className="score-heading">{children}</div>
-      <div className="score-value">{score}</div>
-    </div>
-  );
-}
+const Score = forwardRef(
+  ({ children, score }: ScoreProps, ref: Ref<HTMLDivElement>) => {
+    return (
+      <div className="score" ref={ref}>
+        <div className="score-heading">{children}</div>
+        <div className="score-value">{score}</div>
+      </div>
+    );
+  },
+);
 
 export default Score;
