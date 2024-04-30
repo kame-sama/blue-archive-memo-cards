@@ -4,6 +4,7 @@ import fetchDataFromApi from './util/fetch-data-from-api';
 import shuffle from './util/shuffle';
 import {
   Card,
+  Footer,
   Header,
   Layout,
   Loader,
@@ -105,6 +106,7 @@ function App() {
           <Loader />
         )}
       </Main>
+      <Footer />
     </Layout>
   );
 }

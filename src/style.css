@@ -17,6 +17,10 @@ img {
   height: auto;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .container {
   max-width: 1200px;
   margin-left: auto;
