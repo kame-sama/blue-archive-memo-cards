@@ -1,15 +1,9 @@
 .main .container {
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
   align-items: center;
   padding: 1rem;
-}
-
-.main .loader {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

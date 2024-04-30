@@ -11,6 +11,7 @@ import {
   Score,
 } from './components/components';
 import '@fontsource-variable/noto-sans-jp';
+import './App.css';
 
 function App() {
   const [deck, setDeck] = useState<Character[]>();

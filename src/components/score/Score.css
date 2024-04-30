@@ -1,8 +1,8 @@
 .score {
   width: 125px;
   padding: 0.25rem 0.5rem;
-  background-color: darkblue;
-  color: azure;
+  background-color: var(--clr-primary);
+  color: var(--clr-background);
   border-radius: 5px;
   display: flex;
   justify-content: space-between;

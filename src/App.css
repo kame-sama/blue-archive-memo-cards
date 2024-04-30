@@ -1,0 +1,14 @@
+:root {
+  --clr-primary: #1189f8;
+  --clr-background: #fff;
+  --clr-background-transparent: rgba(255, 255, 255, 50%);
+  --clr-font: #000;
+  --clr-shadow: rgb(42, 42, 42, 50%);
+  color: var(--clr-font);
+}
+
+body {
+  background-image: url(/background.jpg);
+  background-position: center;
+  background-size: cover;
+}

@@ -3,7 +3,6 @@
   height: 48px;
   display: inline-block;
   position: relative;
-  transform: translate(-50%, -50%);
   z-index: 1;
 }
 
@@ -14,7 +13,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: darkblue;
+  background: var(--clr-primary);
   position: absolute;
   left: 0;
   top: 0;

@@ -6,12 +6,13 @@
   width: var(--card-width);
   height: var(--card-height);
   padding: var(--card-padding);
-  background-color: azure;
-  border: 1px solid darkblue;
+  background-color: var(--clr-background);
+  border: 1px solid var(--clr-primary);
   border-radius: 5px;
   display: grid;
   gap: 5px;
   cursor: pointer;
+  box-shadow: -3px 3px 3px var(--clr-shadow);
 }
 
 .card-img {
