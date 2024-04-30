@@ -6,4 +6,13 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  transition:
+    opacity 400ms ease,
+    transform 400ms;
+}
+
+.main .container.fade {
+  opacity: 0;
+  transform: scaleY(0);
+  visibility: hidden;
 }

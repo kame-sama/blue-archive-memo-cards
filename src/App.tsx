@@ -21,6 +21,7 @@ function App() {
   const data = useRef<Character[]>([]);
   const currentScoreRef = useRef<HTMLDivElement>(null);
   const bestScoreRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetchDataFromApi().then((response) => {
@@ -48,6 +49,16 @@ function App() {
       clearTimeout(timeoutId);
     };
   }, [best]);
+
+  useEffect(() => {
+    cardsRef.current?.classList.add('fade');
+    const timeoutId = setTimeout(() => {
+      cardsRef.current?.classList.remove('fade');
+    }, 200);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [deck]);
 
   const handleCardClick = function (id: string) {
     if (clicked.current.has(id)) {
@@ -85,7 +96,7 @@ function App() {
           Best:
         </Score>
       </Header>
-      <Main>
+      <Main ref={cardsRef}>
         {deck ? (
           deck?.map((d) => (
             <Card key={d.id} data={d} onClickHandler={handleCardClick} />
