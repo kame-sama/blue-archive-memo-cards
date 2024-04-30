@@ -13,14 +13,16 @@ import {
 import '@fontsource-variable/noto-sans-jp';
 
 function App() {
-  const [data, setData] = useState<Character[]>();
+  const [deck, setDeck] = useState<Character[]>();
   const [score, setScore] = useState(0);
   const [best, setBest] = useState(0);
   const clicked = useRef(new Set<string>());
+  const data = useRef<Character[]>([]);
 
   useEffect(() => {
     fetchDataFromApi().then((response) => {
-      setData(response);
+      data.current = response;
+      setDeck(data.current.slice(0, 4));
     });
   }, []);
 
@@ -28,19 +30,25 @@ function App() {
     if (clicked.current.has(id)) {
       if (score > best) setBest(score);
       setScore(0);
-      setData(shuffle(data!));
+      setDeck(shuffle(data.current.slice(0, 4)));
       clicked.current.clear();
     } else {
       clicked.current.add(id);
-      if (clicked.current.size === 12) {
-        setScore(0);
-        setBest(12);
+      if (clicked.current.size === deck!.length) {
+        if (deck!.length === 12) {
+          setScore(0);
+          setBest(score + 1);
+          setDeck(shuffle(data.current.slice(0, 4)));
+        } else {
+          setScore(score + 1);
+          setDeck(shuffle(data.current.slice(0, deck!.length + 2)));
+        }
+
         clicked.current.clear();
       } else {
         setScore(score + 1);
+        setDeck(shuffle(deck!.slice(0)));
       }
-
-      setData(shuffle(data!));
     }
   };
 
@@ -51,8 +59,8 @@ function App() {
         <Score score={best}>Best:</Score>
       </Header>
       <Main>
-        {data ? (
-          data?.map((d) => (
+        {deck ? (
+          deck?.map((d) => (
             <Card key={d.id} data={d} onClickHandler={handleCardClick} />
           ))
         ) : (
