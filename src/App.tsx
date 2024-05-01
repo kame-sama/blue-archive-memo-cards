@@ -4,6 +4,7 @@ import fetchDataFromApi from './util/fetch-data-from-api';
 import shuffle from './util/shuffle';
 import {
   Card,
+  ErrorLanding,
   Footer,
   Header,
   Layout,
@@ -28,12 +29,17 @@ function App() {
   const cardsRef = useRef<HTMLDivElement>(null);
   const [playClickSound] = useSound(clickSound);
   const [isSoundOn, setIsSoundOn] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
 
   useEffect(() => {
-    fetchDataFromApi().then((response) => {
-      data.current = response;
-      setDeck(data.current.slice(0, 4));
-    });
+    fetchDataFromApi()
+      .then((response) => {
+        data.current = response;
+        setDeck(data.current.slice(0, 4));
+      })
+      .catch((error) => {
+        if (error instanceof Error) setFetchError(true);
+      });
   }, []);
 
   useEffect(() => {
@@ -93,6 +99,10 @@ function App() {
 
     if (isSoundOn) playClickSound();
   };
+
+  if (fetchError) {
+    return <ErrorLanding />;
+  }
 
   return (
     <SoundContext.Provider value={{ isSoundOn, setIsSoundOn }}>

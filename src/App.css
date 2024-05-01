@@ -4,6 +4,7 @@
   --clr-background-transparent: rgba(255, 255, 255, 50%);
   --clr-font: #000;
   --clr-shadow: rgb(42, 42, 42, 50%);
+  --clr-error: #e83a4e;
   color: var(--clr-font);
 }
 
