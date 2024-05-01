@@ -15,6 +15,7 @@ import { SoundContext } from '../../context/SoundContext';
 import useSound from 'use-sound';
 import clickSound from '/click.wav.mp3';
 import backgroundTheme from '/background-theme.ogg';
+import greeting from '/greeting.ogg';
 
 function Footer() {
   const [playClickSound] = useSound(clickSound);
@@ -25,12 +26,14 @@ function Footer() {
       loop: true,
     },
   );
+  const [playGreeting] = useSound(greeting, { volume: 0.25, interrupt: true });
   const [isMusicOn, setIsMusicOn] = useState(false);
   const { isSoundOn, setIsSoundOn } = useContext(SoundContext);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const helpPopUpRef = useRef<HTMLDivElement>(null);
   const handleHelpButtonClick = () => {
     if (isSoundOn) playClickSound();
+    if (isSoundOn && !isHelpOpen) playGreeting();
     setIsHelpOpen(!isHelpOpen);
     helpPopUpRef.current?.classList.toggle('open');
   };
