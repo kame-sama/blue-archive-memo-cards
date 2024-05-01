@@ -27,7 +27,7 @@ function App() {
   const bestScoreRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const [playClickSound] = useSound(clickSound);
-  const [isSoundOn, setIsSoundOn] = useState(false);
+  const [isSoundOn, setIsSoundOn] = useState(true);
 
   useEffect(() => {
     fetchDataFromApi().then((response) => {
