@@ -5,6 +5,7 @@
   gap: 1rem;
   justify-content: center;
   align-items: center;
+  align-content: center;
   padding: 1rem;
   transition:
     opacity 400ms ease,
