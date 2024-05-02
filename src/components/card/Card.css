@@ -34,6 +34,14 @@
   display: none;
 }
 
+.card-img .loader {
+  display: none;
+}
+
+.card-img:has(> img.hidden) .loader {
+  display: inline-block;
+}
+
 .card-first-name,
 .card-last-name,
 .card-japan-name {
