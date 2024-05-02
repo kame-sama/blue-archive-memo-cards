@@ -8,7 +8,16 @@ interface CardProps {
 
 function Card({ data, onClickHandler }: CardProps) {
   return (
-    <div className="card" onClick={() => onClickHandler(data.id)}>
+    <div
+      className="card"
+      onClick={() => onClickHandler(data.id)}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' && e.target instanceof HTMLDivElement) {
+          e.target.click();
+        }
+      }}
+    >
       <div className="card-img">
         {/* <span className="card-img-loader"></span> */}
         <Loader />
