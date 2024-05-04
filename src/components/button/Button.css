@@ -1,3 +1,11 @@
+button {
+  cursor: pointer;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  font-family: 'Noto Sans JP Variable', sans-serif;
+}
+
 .button-icon {
   position: relative;
   z-index: 20;
@@ -6,7 +14,6 @@
   background-color: transparent;
   display: block;
   border: none;
-  background-color: transparent;
   transition: transform 300ms ease;
   transform: scale(1);
 }
@@ -23,4 +30,21 @@
   width: 56px;
   height: auto;
   fill: var(--clr-primary);
+}
+
+.button-icon-text {
+  font-weight: 700;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--clr-background);
+  background-color: var(--clr-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+.button-icon-text > svg {
+  fill: var(--clr-background);
 }
