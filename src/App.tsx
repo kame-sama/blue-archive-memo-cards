@@ -29,18 +29,20 @@ function App() {
   const cardsRef = useRef<HTMLDivElement>(null);
   const [playClickSound] = useSound(clickSound);
   const [isSoundOn, setIsSoundOn] = useState(true);
-  const [fetchError, setFetchError] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchDataFromApi()
-      .then((response) => {
-        data.current = response;
-        setDeck(data.current.slice(0, 4));
-      })
-      .catch((error) => {
-        if (error instanceof Error) setFetchError(true);
-      });
-  }, []);
+    if (!error) {
+      fetchDataFromApi()
+        .then((response) => {
+          data.current = response;
+          setDeck(data.current.slice(0, 4));
+        })
+        .catch((error) => {
+          if (error instanceof Error) setError(error.message);
+        });
+    }
+  }, [error]);
 
   useEffect(() => {
     currentScoreRef.current?.classList.add('scale-up');
@@ -100,9 +102,9 @@ function App() {
     if (isSoundOn) playClickSound();
   };
 
-  if (fetchError) {
-    return <ErrorLanding />;
-  }
+  const handleRetryClick = function () {
+    setError('');
+  };
 
   return (
     <SoundContext.Provider value={{ isSoundOn, setIsSoundOn }}>
@@ -115,15 +117,19 @@ function App() {
             Best:
           </Score>
         </Header>
-        <Main ref={cardsRef}>
-          {deck ? (
-            deck?.map((d) => (
-              <Card key={d.id} data={d} onClickHandler={handleCardClick} />
-            ))
-          ) : (
-            <Loader />
-          )}
-        </Main>
+        {error ? (
+          <ErrorLanding error={error} handleRetryClick={handleRetryClick} />
+        ) : (
+          <Main ref={cardsRef}>
+            {deck ? (
+              deck?.map((d) => (
+                <Card key={d.id} data={d} onClickHandler={handleCardClick} />
+              ))
+            ) : (
+              <Loader />
+            )}
+          </Main>
+        )}
         <Footer />
       </Layout>
     </SoundContext.Provider>

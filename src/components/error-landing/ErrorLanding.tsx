@@ -1,23 +1,22 @@
-import imgSrc from '/miyu.webp';
 import './ErrorLanding.css';
 import Button from '../button/Button';
 import Icon from '@mdi/react';
-import { mdiReload } from '@mdi/js';
+import { mdiReload, mdiAlertRhombus } from '@mdi/js';
 
-function ErrorLanding() {
+interface ErrorLandingProps {
+  error: string;
+  handleRetryClick: () => void;
+}
+
+function ErrorLanding({ error, handleRetryClick }: ErrorLandingProps) {
   return (
     <div className="error-landing">
       <div className="error-img">
-        <img src={imgSrc} alt="Miyu Portrait" />
+        <Icon path={mdiAlertRhombus} color={null} />
       </div>
-      <div className="error-msg">something went wrong...</div>
-      <Button
-        variant="icon"
-        onClick={() => {
-          window.location.reload();
-        }}
-      >
-        <Icon path={mdiReload} color={null} />
+      <div className="error-msg">{error}</div>
+      <Button variant="iconText" onClick={handleRetryClick}>
+        Retry <Icon path={mdiReload} color={null} size={1} />
       </Button>
     </div>
   );

@@ -22,6 +22,10 @@ async function fetchDataFromApi(): Promise<Character[]> {
     mode: 'cors',
   } as const;
   const response = await fetch(url, options);
+  if (!response.ok) {
+    throw new Error(`HTTP Error: Status ${response.status}`);
+  }
+
   const result = await response.json();
   const data = result.data;
   const formattedData = data.map((d: ApiResponse) => {
